@@ -65,7 +65,8 @@ $network_centers = [
     ['city' => 'Raichuru',           'phone' => '86602 77229', 'phone_link' => '+918660277229', 'contact' => 'Smt. Arunajyothi',           'designation' => 'Centre Coordinator', 'type' => 'Branch Centre', 'color' => '#059669'],
 ];
 
-if (!empty($loc_centers)) $network_centers = $loc_centers;
+// DB centers are used to update status only — static $network_centers has the full display data.
+// Removing DB override prevents broken cards when DB rows lack address/color_light/phone_link.
 ?>
 
 <section id="locations" style="background:var(--slate-50);">

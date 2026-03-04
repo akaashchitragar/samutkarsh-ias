@@ -144,6 +144,7 @@ $use_emailjs = defined('EMAILJS_PUBLIC_KEY') && defined('EMAILJS_SERVICE_ID') &&
     btn.innerHTML = '<i class="ri-loader-4-line me-1"></i> Sending...';
     statusEl.classList.add('d-none');
     statusEl.className = 'footer-form-status d-none';
+    var formData = new FormData(form);
     emailjs.sendForm(
       form.dataset.emailjsServiceId,
       form.dataset.emailjsTemplateId,
@@ -151,6 +152,7 @@ $use_emailjs = defined('EMAILJS_PUBLIC_KEY') && defined('EMAILJS_SERVICE_ID') &&
       form.dataset.emailjsPublicKey
     ).then(function() {
       if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'contact_form' });
+      fetch('submit_contact.php', { method: 'POST', body: formData });
       statusEl.textContent = 'Message sent successfully!';
       statusEl.className = 'footer-form-status footer-form-success';
       form.reset();

@@ -57,9 +57,19 @@ if (empty($testimonials)) {
     </div>
 
     <!-- Cards -->
+    <?php
+    $gradients = [
+        'linear-gradient(135deg,#EA580C,#EF4444)',
+        'linear-gradient(135deg,#3B82F6,#6366F1)',
+        'linear-gradient(135deg,#22C55E,#10B981)',
+        'linear-gradient(135deg,#F59E0B,#EF4444)',
+        'linear-gradient(135deg,#8B5CF6,#6366F1)',
+        'linear-gradient(135deg,#06B6D4,#3B82F6)',
+    ];
+    ?>
     <div class="row g-4">
-      <?php foreach ($testimonials as $t):
-        $gradient = $t['gradient'] ?? 'linear-gradient(135deg,#EA580C,#EF4444)';
+      <?php foreach ($testimonials as $i => $t):
+        $gradient = $t['gradient'] ?? $gradients[$i % count($gradients)];
       ?>
       <div class="col-md-6 col-lg-4">
         <div class="testimonial-card d-flex flex-column h-100 position-relative" style="padding-top:1.75rem;">
