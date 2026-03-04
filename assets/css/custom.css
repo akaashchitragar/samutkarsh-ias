@@ -490,6 +490,7 @@ body {
   border: 1px solid var(--slate-100);
   position: relative;
   height: 100%;
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .testimonial-card:hover {
