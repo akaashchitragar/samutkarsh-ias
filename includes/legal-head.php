@@ -1,7 +1,7 @@
 <?php
 $legal_base_url = 'https://samutkarshias.in';
 $legal_canonical = $legal_base_url . (parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/');
-$legal_og_image = $legal_base_url . '/assets/images/logo.webp';
+$legal_og_image = $legal_base_url . '/assets/images/opengraph.png';
 $legal_full_title = (isset($legal_title) ? $legal_title . ' | ' : '') . 'Samutkarsh IAS';
 ?>
 <!DOCTYPE html>

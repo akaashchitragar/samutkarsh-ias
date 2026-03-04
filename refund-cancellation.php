@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/includes/send-headers.php';
 $legal_title = 'Refund & Cancellation Policy';
 $legal_description = 'Understand Samutkarsh IAS refund and cancellation policy including timelines, eligibility criteria, and refund process for our educational services.';
 require_once __DIR__ . '/includes/legal-head.php';

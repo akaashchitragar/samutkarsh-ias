@@ -8,11 +8,12 @@ if (empty($_SESSION['csrf_token'])) {
 
 // DB connection (sections degrade gracefully if $conn is null)
 require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/includes/send-headers.php';
 
 $base_url = 'https://samutkarshias.in';
-$page_title = "Samutkarsh IAS Academy — Karnataka's Premier Civil Services Institute";
-$page_description = "Samutkarsh IAS Academy — 10+ years of excellence in civil services coaching. 500+ selections, 16+ centers across Karnataka. Join Shraddha-Medha, Utkarsh, IAS Coaching and more.";
-$og_image = $base_url . '/assets/images/logo.webp';
+$page_title = "Samutkarsh IAS Academy | UPSC & KAS Coaching in Karnataka";
+$page_description = "10+ years. 500+ selections, 16+ centres. Premier UPSC & KAS coaching in Karnataka. Shraddha-Medha, Utkarsh, IAS programmes. Enrol now.";
+$og_image = $base_url . '/assets/images/opengraph.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +22,7 @@ $og_image = $base_url . '/assets/images/logo.webp';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo htmlspecialchars($page_title); ?></title>
   <meta name="description" content="<?php echo htmlspecialchars($page_description); ?>">
-  <meta name="keywords" content="IAS coaching Karnataka, UPSC coaching Hubballi, KAS coaching, civil services academy, Samutkarsh IAS, Shraddha-Medha, Utkarsh program, IAS coaching Hubballi">
+  <meta name="keywords" content="IAS coaching Karnataka, UPSC coaching Hubballi, KAS coaching, KPSC coaching, civil services academy, Samutkarsh IAS, Shraddha-Medha, Utkarsh program, IAS coaching Hubballi, UPSC preparation Karnataka, KAS exam coaching, civil services institute, Prelims Mains coaching, IAS IPS coaching, foundation course classes 6-9, Mentorship program UPSC, Comprehensive IAS program, UPSC coaching Bengaluru, KAS coaching Belagavi, civil services coaching North Karnataka, scholarship test IAS, entrance test coaching, answer writing practice, mock test UPSC, Hubballi IAS academy, Samutkarsh Trust">
   <meta name="author" content="Samutkarsh IAS Academy">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="<?php echo htmlspecialchars($base_url); ?>">
@@ -36,6 +37,8 @@ $og_image = $base_url . '/assets/images/logo.webp';
   <meta property="og:image:height" content="512">
   <meta property="og:locale" content="en_IN">
   <meta property="og:site_name" content="Samutkarsh IAS Academy">
+  <meta property="article:published_time" content="2024-01-01">
+  <meta property="article:modified_time" content="2025-03-03">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -96,6 +99,22 @@ $og_image = $base_url . '/assets/images/logo.webp';
       'contactType' => 'customer service',
       'areaServed' => 'IN',
       'availableLanguage' => 'English, Kannada, Hindi',
+    ],
+  ], JSON_UNESCAPED_SLASHES); ?>
+  </script>
+  <script type="application/ld+json">
+  <?php echo json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'WebPage',
+    'name' => $page_title,
+    'description' => $page_description,
+    'url' => $base_url,
+    'datePublished' => '2024-01-01',
+    'dateModified' => '2025-03-03',
+    'publisher' => [
+      '@type' => 'Organization',
+      'name' => 'Samutkarsh IAS Academy',
+      'url' => $base_url,
     ],
   ], JSON_UNESCAPED_SLASHES); ?>
   </script>

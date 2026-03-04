@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/includes/send-headers.php';
 $legal_title = 'Terms & Conditions';
 $legal_description = 'Read the terms and conditions for Samutkarsh IAS educational services including enrollment procedures, student responsibilities, and service policies.';
 require_once __DIR__ . '/includes/legal-head.php';

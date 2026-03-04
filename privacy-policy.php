@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/includes/send-headers.php';
 $legal_title = 'Privacy Policy';
 $legal_description = 'Learn about how Samutkarsh IAS protects your personal information, data collection practices, and privacy rights for our educational services.';
 require_once __DIR__ . '/includes/legal-head.php';
