@@ -14,9 +14,9 @@ if (file_exists(__DIR__ . '/config.php')) {
 }
 
 $db_host = getenv('DB_HOST') ?: (defined('DB_HOST') ? DB_HOST : 'localhost');
-$db_user = getenv('DB_USER') ?: (defined('DB_USER') ? DB_USER : 'your_db_user');
-$db_pass = getenv('DB_PASS') ?: (defined('DB_PASS') ? DB_PASS : 'your_db_password');
-$db_name = getenv('DB_NAME') ?: (defined('DB_NAME') ? DB_NAME : 'samutkarsh_db');
+$db_user = getenv('DB_USER') ?: (defined('DB_USER') ? DB_USER : 'goayu_samutkarshadmin');
+$db_pass = getenv('DB_PASS') ?: (defined('DB_PASS') ? DB_PASS : 'u5Xpz9AdJ,Uw$_(D');
+$db_name = getenv('DB_NAME') ?: (defined('DB_NAME') ? DB_NAME : 'goayu_samutkarshadmin');
 
 if (!defined('DB_HOST')) define('DB_HOST', $db_host);
 if (!defined('DB_USER')) define('DB_USER', $db_user);

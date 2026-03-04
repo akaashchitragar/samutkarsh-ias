@@ -1,14 +1,31 @@
 <?php
-// Fetch active centers from DB
+// Fetch active centers from DB (schema: name, address, city, pincode, phone, manager only)
 $loc_centers = [];
-if (isset($conn)) {
-    $result = $conn->query(
-        "SELECT name, address, city, pincode, phone, contact_person, designation, type FROM centers WHERE status = 'active' ORDER BY city ASC"
-    );
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $loc_centers[] = $row;
+if (isset($conn) && $conn) {
+    try {
+        $result = $conn->query(
+            "SELECT name, address, city, pincode, phone, manager FROM centers WHERE status = 'active' ORDER BY city ASC"
+        );
+        if ($result && $result->num_rows > 0) {
+            $colors = ['#EA580C', '#2563EB', '#7C3AED', '#16A34A', '#DB2777', '#0891B2', '#059669', '#DC2626', '#EA580C'];
+            $i = 0;
+            while ($row = $result->fetch_assoc()) {
+                $loc_centers[] = [
+                    'city'          => $row['city'],
+                    'phone'         => preg_replace('/^\+91\s?/', '', $row['phone']),
+                    'phone_link'    => '+' . preg_replace('/[^0-9]/', '', $row['phone']),
+                    'contact'       => $row['manager'] ?? '',
+                    'contact_person'=> $row['manager'] ?? '',
+                    'designation'   => 'Centre Coordinator',
+                    'type'          => (stripos($row['name'] ?? '', 'Main') !== false || stripos($row['name'] ?? '', 'Hubballi') !== false) ? 'Head Office' : 'Branch Centre',
+                    'color'         => $colors[$i % count($colors)],
+                ];
+                $i++;
+            }
         }
+    } catch (Exception $e) {
+        error_log('Locations DB query failed: ' . $e->getMessage());
+        $loc_centers = [];
     }
 }
 

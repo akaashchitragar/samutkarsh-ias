@@ -5,9 +5,9 @@
  * config.php is not loaded from git (add config.php to .gitignore).
  */
 define('DB_HOST', 'localhost');
-define('DB_USER', 'your_db_user');
-define('DB_PASS', 'your_db_password');
-define('DB_NAME', 'samutkarsh_db');
+define('DB_USER', 'goayu_samutkarshadmin');
+define('DB_PASS', 'u5Xpz9AdJ,Uw$_(D');
+define('DB_NAME', 'goayu_samutkarsh');
 
 /**
  * EmailJS (Quick Contact form in footer).

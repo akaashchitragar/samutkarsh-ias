@@ -76,7 +76,7 @@ $csrf = $_SESSION['csrf_token'] ?? '';
           </h6>
           <ul class="mb-0" style="font-size:0.82rem;color:var(--slate-600);line-height:1.8;padding-left:1.1rem;">
             <li>Shraddha-Medha is open to students in Classes 6–9</li>
-            <li>Utkarsh &amp; IAS Coaching are for degree &amp; graduate students</li>
+            <li>IAS Coaching is for degree &amp; graduate students</li>
             <li>Admission fee for Shraddha-Medha: <strong>&#8377;5,000</strong> (post selection)</li>
             <li>Hall ticket sent to your registered email address</li>
           </ul>
@@ -129,10 +129,7 @@ $csrf = $_SESSION['csrf_token'] ?? '';
                   </button>
                   <div class="custom-select-dropdown" id="course_select-dropdown" role="listbox">
                     <button type="button" class="custom-select-option" role="option" data-value="Shraddha-Medha">Shraddha-Medha (Classes 6–9)</button>
-                    <button type="button" class="custom-select-option" role="option" data-value="Utkarsh">Utkarsh (College Level)</button>
                     <button type="button" class="custom-select-option" role="option" data-value="IAS Coaching">IAS Coaching — Offline, Hubballi</button>
-                    <button type="button" class="custom-select-option" role="option" data-value="Mentorship Program">Mentorship Program</button>
-                    <button type="button" class="custom-select-option" role="option" data-value="Comprehensive Program">Comprehensive Program</button>
                   </div>
                 </div>
               </div>
