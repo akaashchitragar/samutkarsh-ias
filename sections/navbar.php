@@ -4,7 +4,10 @@
     <!-- Brand / Logo -->
     <a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
       <img src="assets/images/logo.webp" alt="Samutkarsh IAS Academy" id="navLogo" style="height:52px;width:auto;transition:height 0.3s ease;">
-      <span class="fw-bold text-dark ms-2" style="font-size:1rem;letter-spacing:-0.02em;">Samutkarsh IAS</span>
+      <div class="ms-1">
+        <div style="font-size:0.85rem;font-weight:800;letter-spacing:0.04em;background:linear-gradient(to right,#ea580c,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;">SAMUTKARSH IAS</div>
+        <div style="font-size:0.65rem;color:#64748b;letter-spacing:0.03em;">Est. 2016 &bull; Karnataka</div>
+      </div>
     </a>
 
     <!-- Mobile Toggle (custom toggle for smooth transition; Bootstrap collapse not used on mobile) -->
