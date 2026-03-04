@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://samutkarshias.in/sitemap.xml

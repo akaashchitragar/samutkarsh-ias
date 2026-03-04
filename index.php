@@ -8,26 +8,45 @@ if (empty($_SESSION['csrf_token'])) {
 
 // DB connection (sections degrade gracefully if $conn is null)
 require_once __DIR__ . '/includes/db.php';
+
+$base_url = 'https://samutkarshias.in';
+$page_title = "Samutkarsh IAS Academy — Karnataka's Premier Civil Services Institute";
+$page_description = "Samutkarsh IAS Academy — 10+ years of excellence in civil services coaching. 500+ selections, 16+ centers across Karnataka. Join Shraddha-Medha, Utkarsh, IAS Coaching and more.";
+$og_image = $base_url . '/assets/images/logo.webp';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samutkarsh IAS Academy &mdash; Karnataka's Premier Civil Services Institute</title>
-  <meta name="description" content="Samutkarsh IAS Academy — 10+ years of excellence in civil services coaching. 500+ selections, 16+ centers across Karnataka. Join Shraddha-Medha, Utkarsh, IAS Coaching and more.">
-  <meta name="keywords" content="IAS coaching Karnataka, UPSC coaching Hubballi, KAS coaching, civil services academy, Samutkarsh IAS">
+  <title><?php echo htmlspecialchars($page_title); ?></title>
+  <meta name="description" content="<?php echo htmlspecialchars($page_description); ?>">
+  <meta name="keywords" content="IAS coaching Karnataka, UPSC coaching Hubballi, KAS coaching, civil services academy, Samutkarsh IAS, Shraddha-Medha, Utkarsh program, IAS coaching Hubballi">
   <meta name="author" content="Samutkarsh IAS Academy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="<?php echo htmlspecialchars($base_url); ?>">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Samutkarsh IAS Academy">
-  <meta property="og:description" content="Karnataka's Premier Civil Services Coaching Institute. 500+ selections, 16+ centers.">
+  <meta property="og:title" content="<?php echo htmlspecialchars($page_title); ?>">
+  <meta property="og:description" content="<?php echo htmlspecialchars($page_description); ?>">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://samutkarshias.in">
-  <meta property="og:image" content="assets/images/logo.webp">
+  <meta property="og:url" content="<?php echo htmlspecialchars($base_url); ?>">
+  <meta property="og:image" content="<?php echo htmlspecialchars($og_image); ?>">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:site_name" content="Samutkarsh IAS Academy">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?php echo htmlspecialchars($page_title); ?>">
+  <meta name="twitter:description" content="<?php echo htmlspecialchars($page_description); ?>">
+  <meta name="twitter:image" content="<?php echo htmlspecialchars($og_image); ?>">
 
   <!-- Favicon -->
   <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+
+  <?php include __DIR__ . '/includes/ga4.php'; ?>
 
   <!-- Bootstrap 5 CSS -->
   <link
@@ -53,6 +72,33 @@ require_once __DIR__ . '/includes/db.php';
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/custom.css?v=<?php echo filemtime(__DIR__ . '/assets/css/custom.css'); ?>">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  <?php echo json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'EducationalOrganization',
+    'name' => 'Samutkarsh IAS Academy',
+    'alternateName' => 'Samutkarsh IAS',
+    'url' => $base_url,
+    'logo' => $og_image,
+    'description' => $page_description,
+    'foundingDate' => '2016',
+    'address' => [
+      '@type' => 'PostalAddress',
+      'addressLocality' => 'Hubballi',
+      'addressRegion' => 'Karnataka',
+      'addressCountry' => 'IN',
+    ],
+    'contactPoint' => [
+      '@type' => 'ContactPoint',
+      'telephone' => '+91-96634-24767',
+      'contactType' => 'customer service',
+      'areaServed' => 'IN',
+      'availableLanguage' => 'English, Kannada, Hindi',
+    ],
+  ], JSON_UNESCAPED_SLASHES); ?>
+  </script>
 </head>
 <body>
 
@@ -85,6 +131,40 @@ require_once __DIR__ . '/includes/db.php';
     class="whatsapp-fab" aria-label="Chat on WhatsApp">
     <i class="ri-whatsapp-line"></i>
   </a>
+
+  <!-- GA4 enhanced events -->
+  <script>
+  (function() {
+    if (typeof gtag !== 'function') return;
+    if (document.location.search.indexOf('contact=success') !== -1) {
+      gtag('event', 'generate_lead', { method: 'contact_form' });
+    }
+    if (document.location.search.indexOf('inquiry_sent') !== -1) {
+      gtag('event', 'generate_lead', { method: 'inquiry_form' });
+    }
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a || !a.href) return;
+      var href = (a.getAttribute('href') || '').trim();
+      if (href.indexOf('wa.me') !== -1) {
+        gtag('event', 'click', { event_category: 'outbound', event_label: 'WhatsApp', link_url: href });
+      } else if (a.target === '_blank' && href.indexOf('http') === 0 && href.indexOf(window.location.hostname) === -1) {
+        gtag('event', 'click', { event_category: 'outbound', event_label: href, link_url: href });
+      }
+    });
+
+    var scrollFired = false;
+    function onScrollDepth() {
+      if (scrollFired) return;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max <= 0 || window.scrollY >= max * 0.9) {
+        scrollFired = true;
+        gtag('event', 'scroll', { event_category: 'engagement', percent_scrolled: 90 });
+      }
+    }
+    window.addEventListener('scroll', onScrollDepth, { passive: true });
+  })();
+  </script>
 
   <!-- Bootstrap 5 JS Bundle -->
   <script

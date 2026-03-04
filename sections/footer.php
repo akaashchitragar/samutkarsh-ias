@@ -150,6 +150,7 @@ $use_emailjs = defined('EMAILJS_PUBLIC_KEY') && defined('EMAILJS_SERVICE_ID') &&
       form,
       form.dataset.emailjsPublicKey
     ).then(function() {
+      if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'contact_form' });
       statusEl.textContent = 'Message sent successfully!';
       statusEl.className = 'footer-form-status footer-form-success';
       form.reset();

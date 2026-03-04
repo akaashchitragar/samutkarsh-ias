@@ -1,0 +1,611 @@
+/* ============================================================
+   Samutkarsh Admin Panel — panel.css
+   ============================================================ */
+
+/* Reset & Base */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    font-family: 'Public Sans', sans-serif;
+    background: #F8FAFC;
+    color: #0F172A;
+    margin: 0;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+.admin-sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: #0F172A;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-brand {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #1E293B;
+    flex-shrink: 0;
+}
+
+.sidebar-brand .brand-name {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #EA580C, #F97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sidebar-brand .brand-sub {
+    display: block;
+    font-size: 0.7rem;
+    color: #475569;
+    margin-top: 0.2rem;
+    font-weight: 400;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0.75rem 0;
+}
+
+.sidebar-section-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #334155;
+    padding: 0.75rem 1.5rem 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.625rem 1.5rem;
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.15s, background 0.15s;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link i {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.sidebar-link:hover {
+    color: #F1F5F9;
+    background: #1E293B;
+}
+
+.sidebar-link.active {
+    color: #fff;
+    background: #1E293B;
+    border-left-color: #EA580C;
+}
+
+.sidebar-spacer { flex: 1; }
+
+.sidebar-link--danger {
+    color: #F87171;
+    border-top: 1px solid #1E293B;
+    margin-top: 0.5rem;
+}
+
+.sidebar-link--danger:hover {
+    color: #EF4444;
+    background: #1E293B;
+}
+
+/* Badge in sidebar */
+.sidebar-badge {
+    margin-left: auto;
+    background: #EA580C;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* ============================================================
+   Main Content
+   ============================================================ */
+.admin-main {
+    flex: 1;
+    min-width: 0;
+    background: #F8FAFC;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-topbar {
+    background: #fff;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 0.875rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.topbar-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin: 0;
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.topbar-user .user-name {
+    font-size: 0.8rem;
+    color: #64748B;
+    font-weight: 500;
+}
+
+.admin-content {
+    padding: 1.75rem;
+    flex: 1;
+}
+
+/* ============================================================
+   Stat Cards
+   ============================================================ */
+.stat-card {
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 4px solid #EA580C;
+    height: 100%;
+}
+
+.stat-card--blue  { border-left-color: #2563EB; }
+.stat-card--green { border-left-color: #16A34A; }
+.stat-card--orange { border-left-color: #EA580C; }
+.stat-card--purple { border-left-color: #7C3AED; }
+.stat-card--amber  { border-left-color: #D97706; }
+
+.stat-card-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0F172A;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.stat-card-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748B;
+}
+
+/* ============================================================
+   Section Cards
+   ============================================================ */
+.panel-card {
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.panel-card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.panel-card-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin: 0;
+}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+.admin-table-wrap {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.admin-table thead th {
+    background: #F8FAFC;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748B;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #E2E8F0;
+    white-space: nowrap;
+}
+
+.admin-table tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #F1F5F9;
+    color: #0F172A;
+    vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table tbody tr:hover td {
+    background: #FFF7ED;
+}
+
+/* ============================================================
+   Badges
+   ============================================================ */
+.badge-pending     { background: #FEF3C7; color: #92400E; }
+.badge-confirmed   { background: #DCFCE7; color: #166534; }
+.badge-cancelled   { background: #FEE2E2; color: #991B1B; }
+.badge-active      { background: #DCFCE7; color: #166534; }
+.badge-inactive    { background: #F1F5F9; color: #475569; }
+.badge-maintenance { background: #FEF3C7; color: #92400E; }
+.badge-called      { background: #DCFCE7; color: #166534; }
+.badge-uncalled    { background: #FEE2E2; color: #991B1B; }
+
+.status-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   Filters / Search Bar
+   ============================================================ */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    align-items: flex-end;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FAFAFA;
+}
+
+.filter-bar .form-control,
+.filter-bar .form-select {
+    font-size: 0.85rem;
+    border-color: #E2E8F0;
+    border-radius: 0.5rem;
+}
+
+.filter-bar .form-control:focus,
+.filter-bar .form-select:focus {
+    border-color: #EA580C;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.12);
+}
+
+/* ============================================================
+   Course Tabs
+   ============================================================ */
+.course-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid #E2E8F0;
+    background: #fff;
+    padding: 0 1.25rem;
+    flex-wrap: wrap;
+}
+
+.course-tab {
+    padding: 0.75rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748B;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.course-tab:hover { color: #EA580C; }
+
+.course-tab.active {
+    color: #EA580C;
+    border-bottom-color: #EA580C;
+}
+
+/* ============================================================
+   Pagination
+   ============================================================ */
+.pagination-wrap {
+    padding: 0.875rem 1.25rem;
+    border-top: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.pagination-info {
+    font-size: 0.8rem;
+    color: #64748B;
+}
+
+.pagination {
+    margin: 0;
+}
+
+.page-link {
+    font-size: 0.8rem;
+    color: #0F172A;
+    border-color: #E2E8F0;
+    padding: 0.35rem 0.65rem;
+}
+
+.page-item.active .page-link {
+    background-color: #EA580C;
+    border-color: #EA580C;
+    color: #fff;
+}
+
+.page-link:hover {
+    background: #FFF7ED;
+    border-color: #EA580C;
+    color: #EA580C;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn-primary-custom {
+    background: #EA580C;
+    border-color: #EA580C;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.btn-primary-custom:hover {
+    background: #C2410C;
+    border-color: #C2410C;
+    color: #fff;
+}
+
+.btn-sm-icon {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+/* ============================================================
+   Login Page
+   ============================================================ */
+.login-page {
+    min-height: 100vh;
+    background: #F8FAFC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.login-card {
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.07);
+}
+
+.login-brand {
+    text-align: center;
+    margin-bottom: 1.75rem;
+}
+
+.login-brand-name {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #EA580C, #F97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+}
+
+.login-brand-sub {
+    font-size: 0.8rem;
+    color: #64748B;
+    font-weight: 400;
+    display: block;
+    margin-top: 0.2rem;
+}
+
+.login-card .form-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.login-card .form-control {
+    font-size: 0.875rem;
+    border-color: #E2E8F0;
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.875rem;
+}
+
+.login-card .form-control:focus {
+    border-color: #EA580C;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.12);
+}
+
+.btn-login {
+    background: #EA580C;
+    border-color: #EA580C;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.625rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    transition: background 0.15s;
+}
+
+.btn-login:hover {
+    background: #C2410C;
+    border-color: #C2410C;
+    color: #fff;
+}
+
+/* ============================================================
+   Flash Alerts
+   ============================================================ */
+.flash-alert {
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: none;
+}
+
+/* ============================================================
+   Detail Sidebar / Offcanvas Data
+   ============================================================ */
+.detail-field {
+    margin-bottom: 0.875rem;
+}
+
+.detail-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748B;
+    margin-bottom: 0.15rem;
+}
+
+.detail-value {
+    font-size: 0.9rem;
+    color: #0F172A;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+/* ============================================================
+   Testimonial Reorder Handle
+   ============================================================ */
+.drag-handle {
+    cursor: grab;
+    color: #94A3B8;
+    font-size: 1.2rem;
+    padding: 0 0.25rem;
+}
+
+.drag-handle:active { cursor: grabbing; }
+
+.sortable-ghost {
+    opacity: 0.4;
+    background: #FFF7ED !important;
+}
+
+/* ============================================================
+   Star Rating
+   ============================================================ */
+.stars {
+    color: #F59E0B;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   Empty State
+   ============================================================ */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: #94A3B8;
+}
+
+.empty-state i {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.empty-state p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        display: none;
+    }
+
+    .admin-content {
+        padding: 1rem;
+    }
+
+    .admin-topbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .filter-bar {
+        padding: 0.75rem 1rem;
+    }
+}

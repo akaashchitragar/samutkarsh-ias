@@ -536,6 +536,10 @@ $csrf = $_SESSION['csrf_token'] ?? '';
     .then(function(r) { return r.json(); })
     .then(function(data) {
       if (data.success) {
+        if (typeof gtag === 'function') {
+          var course = formData.get('course') || '';
+          gtag('event', 'generate_lead', { method: 'enrollment_form', course: course });
+        }
         getEl('enrollment-form').classList.add('d-none');
         getEl('form-success-message').classList.remove('d-none');
         getEl('form-footer-text').classList.add('d-none');
