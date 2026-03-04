@@ -1,44 +1,27 @@
 <?php
-// Fetch testimonials from DB if available
-$testimonials = [];
-if (isset($conn)) {
-    $result = $conn->query("SELECT * FROM testimonials WHERE is_active = 1 ORDER BY display_order ASC LIMIT 6");
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $testimonials[] = $row;
-        }
-    }
-}
-
-// Fallback static testimonials
-if (empty($testimonials)) {
-    $testimonials = [
-        [
-            'name'      => 'Vishwanath Diggavi',
-            'batch'     => '2018 Batch',
-            'avatar'    => 'VD',
-            'gradient'  => 'linear-gradient(135deg,#EA580C,#EF4444)',
-            'quote'     => 'Samutkarsh centre is best coaching centre in North Karnataka part. It\'s easy to learn about civil service examination because teachers directly interact with students. I learned about CSE as well as enjoyed cultural activities held in this institute.',
-            'rating'    => 5,
-        ],
-        [
-            'name'      => 'Runald Jadhav',
-            'batch'     => '2018 Batch',
-            'avatar'    => 'RJ',
-            'gradient'  => 'linear-gradient(135deg,#3B82F6,#6366F1)',
-            'quote'     => 'It was a great experience where we got academic coaching and our cultural values and moral guidance. We give through our results all we need is your care and support. Thank you to all of Samutkarsh team.',
-            'rating'    => 5,
-        ],
-        [
-            'name'      => 'Ramya Gayakwad',
-            'batch'     => '2018 Batch',
-            'avatar'    => 'RG',
-            'gradient'  => 'linear-gradient(135deg,#22C55E,#10B981)',
-            'quote'     => 'I really liked the way institute helped us through our preparation. English workshop was very nice — we learnt about our friends and how to interact. Thank you sir for giving the opportunity to be part of this institute.',
-            'rating'    => 5,
-        ],
-    ];
-}
+$testimonials = [
+    [
+        'name'     => 'Vishwanath Diggavi',
+        'batch'    => '2018 Batch',
+        'gradient' => 'linear-gradient(135deg,#EA580C,#EF4444)',
+        'quote'    => 'Samutkarsh centre is best coaching centre in North Karnataka part. It\'s easy to learn about civil service examination because teachers directly interact with students. I learned about CSE as well as enjoyed cultural activities held in this institute.',
+        'rating'   => 5,
+    ],
+    [
+        'name'     => 'Runald Jadhav',
+        'batch'    => '2018 Batch',
+        'gradient' => 'linear-gradient(135deg,#3B82F6,#6366F1)',
+        'quote'    => 'It was a great experience where we got academic coaching and our cultural values and moral guidance. We give through our results all we need is your care and support. Thank you to all of Samutkarsh team.',
+        'rating'   => 5,
+    ],
+    [
+        'name'     => 'Ramya Gayakwad',
+        'batch'    => '2018 Batch',
+        'gradient' => 'linear-gradient(135deg,#22C55E,#10B981)',
+        'quote'    => 'I really liked the way institute helped us through our preparation. English workshop was very nice — we learnt about our friends and how to interact. Thank you sir for giving the opportunity to be part of this institute.',
+        'rating'   => 5,
+    ],
+];
 ?>
 
 <section id="testimonials">
@@ -84,7 +67,7 @@ if (empty($testimonials)) {
               <i class="ri-double-quotes-l" style="color:#fff;font-size:0.9rem;"></i>
             </div>
             <div class="stars">
-              <?php for ($i = 0; $i < (int)($t['rating'] ?? 5); $i++): ?>
+              <?php for ($s = 0; $s < (int)($t['rating'] ?? 5); $s++): ?>
                 <i class="ri-star-fill"></i>
               <?php endfor; ?>
             </div>

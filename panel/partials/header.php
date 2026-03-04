@@ -65,12 +65,7 @@ $flash = $flash ?? get_flash();
         <?php endif; ?>
       </a>
 
-      <a href="<?php echo htmlspecialchars(panel_url('testimonials.php'), ENT_QUOTES, 'UTF-8'); ?>"
-         class="sidebar-link <?php echo in_array(basename($_SERVER['PHP_SELF'] ?? '', '.php'), ['testimonials', 'testimonial-form', 'testimonial-delete', 'testimonial-reorder']) ? 'active' : ''; ?>">
-        <i class="ri-star-line"></i> Testimonials
-      </a>
-
-      <a href="<?php echo htmlspecialchars(panel_url('centers.php'), ENT_QUOTES, 'UTF-8'); ?>"
+<a href="<?php echo htmlspecialchars(panel_url('centers.php'), ENT_QUOTES, 'UTF-8'); ?>"
          class="sidebar-link <?php echo in_array(basename($_SERVER['PHP_SELF'] ?? '', '.php'), ['centers', 'center-form']) ? 'active' : ''; ?>">
         <i class="ri-building-2-line"></i> Centers
       </a>

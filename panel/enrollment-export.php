@@ -25,6 +25,7 @@ $is_school  = ($course_key === 'shraddhamedha');
 $q             = clean($_GET['q'] ?? '');
 $center_filter = clean($_GET['center'] ?? '');
 $status_filter = in_array($_GET['status'] ?? '', ['pending', 'confirmed', 'cancelled']) ? $_GET['status'] : '';
+$year_filter   = (int) ($_GET['year'] ?? 0);
 
 // Build WHERE (same logic as enrollments.php)
 $where  = ['1=1'];
@@ -40,6 +41,11 @@ if ($status_filter !== '') {
     $where[]  = 'status = ?';
     $types   .= 's';
     $params[] = $status_filter;
+}
+if ($year_filter > 0) {
+    $where[]  = 'YEAR(created_at) = ?';
+    $types   .= 'i';
+    $params[] = $year_filter;
 }
 if ($q !== '') {
     $like = '%' . $q . '%';

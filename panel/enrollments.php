@@ -29,6 +29,7 @@ $table      = $table_map[$course_key];
 $q             = clean($_GET['q'] ?? '');
 $center_filter = clean($_GET['center'] ?? '');
 $status_filter = in_array($_GET['status'] ?? '', ['pending', 'confirmed', 'cancelled']) ? $_GET['status'] : '';
+$year_filter   = (int) ($_GET['year'] ?? 0);
 $current_page  = max(1, (int) ($_GET['page'] ?? 1));
 $per_page      = 25;
 
@@ -63,6 +64,11 @@ if ($conn) {
         $where[]  = 'status = ?';
         $types   .= 's';
         $params[] = $status_filter;
+    }
+    if ($year_filter > 0) {
+        $where[]  = 'YEAR(created_at) = ?';
+        $types   .= 'i';
+        $params[] = $year_filter;
     }
     if ($q !== '') {
         $like     = '%' . $q . '%';
@@ -102,7 +108,7 @@ if ($conn) {
 }
 
 // Preserve filters for links
-$filter_params = ['course' => $course_key, 'q' => $q, 'center' => $center_filter, 'status' => $status_filter];
+$filter_params = ['course' => $course_key, 'q' => $q, 'center' => $center_filter, 'status' => $status_filter, 'year' => $year_filter ?: ''];
 $base_url      = 'enrollments.php?' . http_build_query($filter_params);
 $export_url    = 'enrollment-export.php?' . http_build_query($filter_params);
 
@@ -148,6 +154,15 @@ include __DIR__ . '/partials/header.php';
         <option value="pending"   <?php echo $status_filter === 'pending'   ? 'selected' : ''; ?>>Pending</option>
         <option value="confirmed" <?php echo $status_filter === 'confirmed' ? 'selected' : ''; ?>>Confirmed</option>
         <option value="cancelled" <?php echo $status_filter === 'cancelled' ? 'selected' : ''; ?>>Cancelled</option>
+      </select>
+    </div>
+    <div>
+      <label class="form-label mb-1" style="font-size:0.75rem;font-weight:600">Year</label>
+      <select name="year" class="form-select" style="min-width:100px">
+        <option value="">All Years</option>
+        <?php for ($y = (int) date('Y'); $y >= 2022; $y--): ?>
+          <option value="<?php echo $y; ?>" <?php echo $year_filter === $y ? 'selected' : ''; ?>><?php echo $y; ?></option>
+        <?php endfor; ?>
       </select>
     </div>
     <div class="d-flex gap-2 align-items-end">
