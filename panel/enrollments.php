@@ -208,7 +208,7 @@ include __DIR__ . '/partials/header.php';
         </thead>
         <tbody>
           <?php foreach ($rows as $row): ?>
-            <tr>
+            <tr style="cursor:pointer" onclick="showDetail(<?php echo htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8'); ?>, <?php echo $is_school ? 'true' : 'false'; ?>)">
               <td style="color:#94A3B8;font-size:0.8rem"><?php echo (int) $row['id']; ?></td>
               <td>
                 <div style="font-weight:600"><?php echo htmlspecialchars($row['full_name'], ENT_QUOTES, 'UTF-8'); ?></div>
@@ -225,7 +225,7 @@ include __DIR__ . '/partials/header.php';
                 <td style="font-size:0.85rem"><?php echo htmlspecialchars($row['phone_number'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
               <?php endif; ?>
               <td style="font-size:0.82rem"><?php echo htmlspecialchars($row['center'], ENT_QUOTES, 'UTF-8'); ?></td>
-              <td>
+              <td onclick="event.stopPropagation()">
                 <?php if (can_edit()): ?>
                   <form method="POST" action="enrollment-status.php" style="min-width:110px">
                     <?php echo csrf_field(); ?>
@@ -248,8 +248,7 @@ include __DIR__ . '/partials/header.php';
                 <?php echo htmlspecialchars(date('d M Y', strtotime($row['created_at'])), ENT_QUOTES, 'UTF-8'); ?>
               </td>
               <td>
-                <button type="button" class="btn btn-sm btn-outline-secondary btn-sm-icon"
-                        onclick="showDetail(<?php echo htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8'); ?>, <?php echo $is_school ? 'true' : 'false'; ?>)">
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-sm-icon">
                   <i class="ri-eye-line"></i>
                 </button>
               </td>

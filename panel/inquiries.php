@@ -127,12 +127,13 @@ include __DIR__ . '/partials/header.php';
         </thead>
         <tbody>
           <?php foreach ($rows as $row): ?>
-            <tr>
+            <tr style="cursor:pointer" onclick="showInquiry(<?php echo htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8'); ?>)">
               <td style="color:#94A3B8;font-size:0.8rem"><?php echo (int) $row['id']; ?></td>
               <td><?php echo htmlspecialchars($row['full_name'], ENT_QUOTES, 'UTF-8'); ?></td>
               <td>
                 <a href="tel:<?php echo htmlspecialchars($row['phone'], ENT_QUOTES, 'UTF-8'); ?>"
-                   style="color:#EA580C;font-weight:600;text-decoration:none">
+                   style="color:#EA580C;font-weight:600;text-decoration:none"
+                   onclick="event.stopPropagation()">
                   <?php echo htmlspecialchars($row['phone'], ENT_QUOTES, 'UTF-8'); ?>
                 </a>
               </td>
@@ -154,7 +155,7 @@ include __DIR__ . '/partials/header.php';
                 <?php echo htmlspecialchars(date('d M Y', strtotime($row['created_at'])), ENT_QUOTES, 'UTF-8'); ?>
               </td>
               <?php if (can_edit()): ?>
-                <td>
+                <td onclick="event.stopPropagation()">
                   <form method="POST" action="inquiry-toggle.php" style="display:inline">
                     <?php echo csrf_field(); ?>
                     <input type="hidden" name="id" value="<?php echo (int) $row['id']; ?>">
@@ -191,5 +192,48 @@ include __DIR__ . '/partials/header.php';
   <?php endif; ?>
 
 </div><!-- /.panel-card -->
+
+<!-- Detail Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="inquiryCanvas" style="width:420px">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" style="font-size:0.95rem;font-weight:700">Inquiry Detail</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="inquiryBody" style="font-size:0.875rem"></div>
+</div>
+
+<?php
+$extra_js = <<<'JS'
+<script>
+function showInquiry(row) {
+  var fields = [
+    ['Name',       row.full_name],
+    ['Phone',      row.phone],
+    ['Email',      row.email],
+    ['Course',     row.course],
+    ['Center',     row.center],
+    ['Message',    row.message],
+    ['Status',     row.is_called == 1 ? 'Called' : 'Pending'],
+    ['Received On', row.created_at],
+  ];
+  var html = '';
+  fields.forEach(function(f) {
+    var val = f[1] || '—';
+    html += '<div class="detail-field">'
+          + '<div class="detail-label">' + escHtml(f[0]) + '</div>'
+          + '<div class="detail-value">' + escHtml(val) + '</div>'
+          + '</div>';
+  });
+  document.getElementById('inquiryBody').innerHTML = html;
+  new bootstrap.Offcanvas(document.getElementById('inquiryCanvas')).show();
+}
+function escHtml(str) {
+  var d = document.createElement('div');
+  d.appendChild(document.createTextNode(String(str)));
+  return d.innerHTML;
+}
+</script>
+JS;
+?>
 
 <?php include __DIR__ . '/partials/footer.php'; ?>
