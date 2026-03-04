@@ -98,7 +98,7 @@ $use_emailjs = defined('EMAILJS_PUBLIC_KEY') && defined('EMAILJS_SERVICE_ID') &&
             $emailjs_template = EMAILJS_TEMPLATE_ID;
           }
           ?>
-          <form id="footer-contact-form" class="footer-form" <?php if ($use_emailjs) { ?>data-emailjs-public-key="<?php echo htmlspecialchars($emailjs_key); ?>" data-emailjs-service-id="<?php echo htmlspecialchars($emailjs_service); ?>" data-emailjs-template-id="<?php echo htmlspecialchars($emailjs_template); ?>"<?php } else { ?>action="submit_contact.php" method="POST"<?php } ?>>
+          <form id="footer-contact-form" class="footer-form">
             <input type="text" name="first_name" required placeholder="Your Name" class="footer-form-input">
             <input type="email" name="email" required placeholder="Your Email" class="footer-form-input">
             <textarea name="message" rows="3" required placeholder="Your Message" class="footer-form-input footer-form-textarea"></textarea>
@@ -130,40 +130,33 @@ $use_emailjs = defined('EMAILJS_PUBLIC_KEY') && defined('EMAILJS_SERVICE_ID') &&
 </footer>
 
 
-<?php if (!empty($use_emailjs)): ?>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function() {
   var form = document.getElementById('footer-contact-form');
-  if (!form || !form.dataset.emailjsPublicKey) return;
+  if (!form) return;
   var btn = document.getElementById('footer-contact-submit');
   var statusEl = document.getElementById('footer-contact-status');
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     btn.disabled = true;
     btn.innerHTML = '<i class="ri-loader-4-line me-1"></i> Sending...';
-    statusEl.classList.add('d-none');
     statusEl.className = 'footer-form-status d-none';
-    var formData = new FormData(form);
-    emailjs.sendForm(
-      form.dataset.emailjsServiceId,
-      form.dataset.emailjsTemplateId,
-      form,
-      form.dataset.emailjsPublicKey
-    ).then(function() {
-      if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'contact_form' });
-      fetch('submit_contact.php', { method: 'POST', body: formData });
-      statusEl.textContent = 'Message sent successfully!';
-      statusEl.className = 'footer-form-status footer-form-success';
-      form.reset();
-    }).catch(function() {
-      statusEl.textContent = 'Failed to send. Please try again.';
-      statusEl.className = 'footer-form-status footer-form-error';
-    }).finally(function() {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="ri-send-plane-line me-1"></i> Send Message';
-    });
+    fetch('submit_contact.php', { method: 'POST', body: new FormData(form), headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+      .then(function(res) {
+        if (!res.ok) throw new Error('server');
+        if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'contact_form' });
+        statusEl.textContent = 'Message sent successfully!';
+        statusEl.className = 'footer-form-status footer-form-success';
+        form.reset();
+      })
+      .catch(function() {
+        statusEl.textContent = 'Failed to send. Please try again.';
+        statusEl.className = 'footer-form-status footer-form-error';
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ri-send-plane-line me-1"></i> Send Message';
+      });
   });
 })();
 </script>
-<?php endif; ?>
