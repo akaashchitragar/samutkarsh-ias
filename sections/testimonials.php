@@ -60,7 +60,6 @@ if (empty($testimonials)) {
     <div class="row g-4">
       <?php foreach ($testimonials as $t):
         $gradient = $t['gradient'] ?? 'linear-gradient(135deg,#EA580C,#EF4444)';
-        $avatar   = $t['avatar']   ?? strtoupper(substr($t['name'], 0, 2));
       ?>
       <div class="col-md-6 col-lg-4">
         <div class="testimonial-card d-flex flex-column h-100 position-relative" style="padding-top:1.75rem;">
@@ -87,19 +86,13 @@ if (empty($testimonials)) {
           </p>
 
           <!-- Student Info -->
-          <div class="d-flex align-items-center gap-3 pt-3" style="border-top:1px solid var(--slate-100);">
-            <div class="d-flex align-items-center justify-content-center rounded-circle fw-bold flex-shrink-0"
-              style="width:40px;height:40px;background:<?php echo htmlspecialchars($gradient); ?>;color:#fff;font-size:0.75rem;">
-              <?php echo htmlspecialchars($avatar); ?>
-            </div>
-            <div>
-              <h5 class="fw-bold mb-0" style="font-size:0.9rem;color:var(--slate-900);">
-                <?php echo htmlspecialchars($t['name']); ?>
-              </h5>
-              <span class="d-inline-block px-2 py-0" style="font-size:0.7rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--slate-500);background:var(--slate-100);border-radius:999px;">
-                <?php echo htmlspecialchars($t['batch']); ?>
-              </span>
-            </div>
+          <div class="pt-3" style="border-top:1px solid var(--slate-100);">
+            <h5 class="fw-bold mb-0" style="font-size:0.9rem;color:var(--slate-900);">
+              <?php echo htmlspecialchars($t['name']); ?>
+            </h5>
+            <span class="d-inline-block px-2 py-0 mt-1" style="font-size:0.7rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--slate-500);background:var(--slate-100);border-radius:999px;">
+              <?php echo htmlspecialchars($t['batch']); ?>
+            </span>
           </div>
 
         </div>
