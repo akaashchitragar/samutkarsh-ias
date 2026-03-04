@@ -52,7 +52,7 @@ require_once __DIR__ . '/includes/db.php';
   >
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css">
+  <link rel="stylesheet" href="assets/css/custom.css?v=<?php echo filemtime(__DIR__ . '/assets/css/custom.css'); ?>">
 </head>
 <body>
 
